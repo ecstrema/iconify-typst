@@ -29,6 +29,7 @@ function enumerate {
   local f
 
   for f in \
+    "./typst.toml" \
     "./README.md" \
     "./LICENSE.MIT" \
     "./thumbnail-dark.svg" \
