@@ -7,7 +7,7 @@ Use all of Iconify icons in your Typst documents. Browse all the icons at [icone
 `iconify-typst` loads icons from Iconify JSON collections and gives you back an icon image.
 
 ```typ
-#import "@preview/iconify-typst:0.1.0": icon
+#import "@preview/iconify-typst:0.3.0": icon
 
 #set page(height: auto, width: auto, margin: 1em)
 
@@ -25,7 +25,7 @@ Result:
 Most of the time, you will want to use the `icon` function, which gives directly an inline image.
 
 ```typ
-#import "@preview/iconify-typst:0.1.0": icon
+#import "@preview/iconify-typst:0.3.0": icon
 
 #set page(height: auto, width: auto, margin: 1em)
 
@@ -53,7 +53,7 @@ Result:
 If you need more control over the SVG, you can get it directly with the `icon-svg` function, which gives you back the raw SVG string. You can then use it in an `image` block or manipulate it as you want. Note that before passing it to an image, you'll want to convert it to `bytes`, and pass the `format: "svg"` parameter to the image, otherwise it won't be rendered correctly.
 
 ```typ
-#import "@preview/iconify-typst:0.1.0": icon
+#import "@preview/iconify-typst:0.3.0": icon
 
 #set page(height: auto, width: auto, margin: 1em)
 
@@ -69,7 +69,7 @@ Result:
 If you want the image, but do not care about it being inline, you can use the `block-icon` function, which gives you a raw image. It has an identical API to `icon`, but does not apply the vertical offset.
 
 ```typ
-#import "@preview/iconify-typst:0.1.0": icon
+#import "@preview/iconify-typst:0.3.0": icon
 
 #set page(height: auto, width: auto, margin: 1em)
 
