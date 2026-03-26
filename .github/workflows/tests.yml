@@ -27,13 +27,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: stable
+      - uses: actions/checkout@v6
+      - uses: oven-sh/setup-bun@v2
 
       - name: Install dependencies
         run: cd src && bun install
