@@ -1,6 +1,6 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./thumbnail-dark.svg">
-  <img src="./thumbnail-light.svg">
+  <img src="./thumbnail-light.svg" alt="Iconify for Typst">
 </picture>
 
 Use all of Iconify icons. Browse all the icons at [icones.js.org](https://icones.js.org). Supports Typst 0.13 and above.
@@ -98,7 +98,7 @@ This project is a small wrapper on the shoulder of these giants:
 
 ## Development
 
-You'll need the [Just](https://just.systems/) test runner. See the [Justfile](./Justfile) or run `just` without arguments for the available commands.
+You'll need the [Just](https://just.systems/) test runner. See the `Justfile` or run `just` without arguments for the available commands.
 
 # License
 
