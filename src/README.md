@@ -9,7 +9,7 @@ More precisely:
 - entrypoint: `your_doc.typ`
 
 ```typ
-#import "@preview/iconify:0.4.0": icon
+#import "@preview/iconify:0.4.1": icon
 
 
 This is a home icon from the lucide collection: #image(icon("lucide:home", color: blue), size: 24pt)

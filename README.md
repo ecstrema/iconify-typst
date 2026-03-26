@@ -10,7 +10,7 @@ Use all of Iconify icons. Browse all the icons at [icones.js.org](https://icones
 `iconify` loads icons from Iconify JSON collections and gives you back an icon image.
 
 ```typ
-#import "@preview/iconify:0.4.0": icon
+#import "@preview/iconify:0.4.1": icon
 
 #set page(height: auto, width: auto, margin: 1em)
 
@@ -28,7 +28,7 @@ Result:
 Most of the time, you will want to use the `icon` function, which gives directly an inline image.
 
 ```typ
-#import "@preview/iconify:0.4.0": icon
+#import "@preview/iconify:0.4.1": icon
 
 #set page(height: auto, width: auto, margin: 1em)
 
@@ -56,7 +56,7 @@ Result:
 If you need more control over the SVG, you can get it directly with the `icon-svg` function, which gives you back the raw SVG string. You can then use it in an `image` block or manipulate it as you want. Note that before passing it to an image, you'll want to convert it to `bytes`, and pass the `format: "svg"` parameter to the image, otherwise it won't be rendered correctly.
 
 ```typ
-#import "@preview/iconify:0.4.0": icon
+#import "@preview/iconify:0.4.1": icon
 
 #set page(height: auto, width: auto, margin: 1em)
 
@@ -72,7 +72,7 @@ Result:
 If you want the image, but do not care about it being inline, you can use the `block-icon` function, which gives you a raw image. It has an identical API to `icon`, but does not apply the vertical offset.
 
 ```typ
-#import "@preview/iconify:0.4.0": icon
+#import "@preview/iconify:0.4.1": icon
 
 #set page(height: auto, width: auto, margin: 1em)
 
