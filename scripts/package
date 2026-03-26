@@ -22,45 +22,32 @@ fi
 TARGET="$(resolve-target "${1:?Missing target path, @local or @preview}")"
 echo "Install dir: $TARGET"
 
-# ignore rules
-readarray -t ignores < <(grep -v '^#' .typstignore | grep '[^[:blank:]]')
-
-# recursively print all files that are not excluded via .typstignore
 function enumerate {
   local root="$1"
-  if [[ -f "$root" ]]; then
-    echo "$root"
-  else
-    local files
-    readarray -t files < <(find "$root" \
-      -mindepth 1 -maxdepth 1 \
-      -not -name .git \
-      -not -name .typstignore)
-    # declare -p files >&2
+  [[ "$root" == "." ]] || return 0
 
-    local f
-    for f in "${files[@]}"; do
-      local include
-      include=1
+  local f
 
-      local ignore
-      for ignore in "${ignores[@]}"; do
-        if [[ "$ignore" =~ ^! ]]; then
-          ignore="${ignore:1}"
-          if [[ "$f" == ./$ignore ]]; then
-            # echo "\"$f\" matched \"!$ignore\"" >&2
-            include=1
-          fi
-        elif [[ "$f" == ./$ignore ]]; then
-          # echo "\"$f\" matched \"$ignore\"" >&2
-          include=0
-        fi
-      done
-      if [[ "$include" == 1 ]]; then
-        enumerate "$f"
-      fi
-    done
-  fi
+  for f in \
+    "./README.md" \
+    "./LICENSE.MIT" \
+    "./thumbnail-dark.svg" \
+    "./thumbnail-light.svg" \
+    "./src/README.md" \
+    "./src/lib.typ" \
+    "./src/node_modules/@iconify/json/collections.json"
+  do
+    [[ -e "$f" ]] && echo "$f"
+  done
+
+  for f in ./src/node_modules/@iconify/json/json/*.json; do
+    [[ -f "$f" ]] && echo "$f"
+  done
+
+  # All .png files in tests/** (including subdirectories)
+  for f in ./tests/**/ref/*.png; do
+    [[ -f "$f" ]] && echo "$f"
+  done
 }
 
 # List of all files that get packaged

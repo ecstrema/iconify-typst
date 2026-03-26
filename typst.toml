@@ -1,16 +1,16 @@
 # for a description of available keys, see https://github.com/typst/packages/?tab=readme-ov-file#package-format
 
 [package]
-name = ""
+name = "iconify-typst"
 version = "0.1.0"
 entrypoint = "src/lib.typ"
-authors = []
-license = "Unlicense"
-description = ""
-homepage = ""
-repository = ""
-keywords = []
-categories = []
+authors = ["ecstrema"]
+license = "MIT"
+description = "Use all of iconify's icons in typst"
+homepage = "https://github.com/ecstrema/iconify-typst"
+repository = "https://github.com/ecstrema/iconify-typst"
+keywords = ["iconify", "icons", "mdi", "material", "lucide", "phosphor", "remix", "tableau", "design", "solar", "tabler", "unicons"]
+categories = ["components"]
 disciplines = []
 # compiler = ""
 exclude = [
@@ -18,7 +18,6 @@ exclude = [
   "docs",
   "scripts",
   "tests",
-  ".typstignore",
   "Justfile",
   "thumbnail-dark.svg",
   "thumbnail-light.svg",

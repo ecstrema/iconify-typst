@@ -1,0 +1,9 @@
+{
+  "name": "src",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "dependencies": {
+    "@iconify/json": "^2.2.454"
+  }
+}

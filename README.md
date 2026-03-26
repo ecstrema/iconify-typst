@@ -1,69 +1,102 @@
-# The `my-package` Package
-<div align="center">Version 0.1.0</div>
+# Typst Iconify
 
-A short description about the project and/or client.
+Use all of Iconify icons in your Typst documents. Browse all the icons at [icones.js.org](https://icones.js.org).
 
-## Template adaptation checklist
+## Overview
 
-- [ ] Fill out `README.md`
-  - Change the `my-package` package name, including code snippets
-  - Check section contents and/or delete sections that don't apply
-- [ ] Check and/or replace `LICENSE` by something that suits your needs
-- [ ] Fill out `typst.toml`
-  - See also the [typst/packages README](https://github.com/typst/packages/?tab=readme-ov-file#package-format)
-- [ ] Adapt Repository URLs in `CHANGELOG.md`
-  - Consider only committing that file with your first release, or removing the "Initial Release" part in the beginning
-- [ ] Adapt or deactivate the release workflow in `.github/workflows/release.yml`
-  - to deactivate it, delete that file or remove/comment out lines 2-4 (`on:` and following)
-  - to use the workflow
-    - [ ] check the values under `env:`, particularly `REGISTRY_FORK`
-    - [ ] if you don't have one, [create a fine-grained personal access token](https://github.com/settings/tokens?type=beta) with [only Contents permission](https://stackoverflow.com/a/75116350/371191) for the `REGISTRY_FORK`
-    - [ ] on this repo, create a secret `REGISTRY_TOKEN` (at `https://github.com/[user]/[repo]/settings/secrets/actions`) that contains the so created token
-
-    if configured correctly, whenever you create a tag `v...`, your package will be pushed onto a branch on the `REGISTRY_FORK`, from which you can then create a pull request against [typst/packages](https://github.com/typst/packages/)
-- [ ] remove/replace the example test case
-- [ ] (add your actual code, docs and tests)
-- [ ] remove this section from the README
-
-## Getting Started
-
-These instructions will get you a copy of the project up and running on the typst web app. Perhaps a short code example on importing the package and a very simple teaser usage.
+`iconify-typst` loads icons from Iconify JSON collections and gives you back an icon image.
 
 ```typ
-#import "@preview/my-package:0.1.0": *
+#import "@preview/iconify-typst:0.1.0": icon
 
-#show: my-show-rule.with()
-#my-func()
+#set page(height: auto, width: auto, margin: 1em)
+
+text with an inline #icon("mdi:home", color: blue, width: 1em, y: -0.2em) icon
 ```
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./thumbnail-dark.svg">
-  <img src="./thumbnail-light.svg">
-</picture>
+Result:
 
-### Installation
-
-A step by step guide that will tell you how to get the development environment up and running. This should explain how to clone the repo and where to (maybe a link to the typst documentation on it), along with any pre-requisite software and installation steps.
-
-```
-$ First step
-$ Another step
-$ Final step
-```
+![Home Icon](./tests/readme_overview/ref/1.png)
 
 ## Usage
 
-A more in-depth description of usage. Any template arguments? A complicated example that showcases most if not all of the functions the package provides? This is also an excellent place to signpost the manual.
+### `icon`
+
+Most of the time, you will want to use the `icon` function, which gives directly an inline image.
 
 ```typ
-#import "@preview/my-package:0.1.0": *
+#import "@preview/iconify-typst:0.1.0": icon
 
-#let my-complicated-example = ...
+#set page(height: auto, width: auto, margin: 1em)
+
+// Basic usage
+#icon("streamline-ultimate:american-football-helmet-bold")
+
+// With color
+#icon("carbon:3d-curve-auto-colon", color: red)
+
+// you can adjust the vertical position of the icon with the `y` parameter, for example to align it better with the text baseline:
+Aligned with text #icon("mdi:home", y: -0.3em)
+
+Not so aligned with text #icon("mdi:home")
+
+// The other parameters are passed to the image, so you can adjust the size of the icon with `width` and/or `height`:
+#icon("bx:body", width: 4em)
 ```
 
-## Additional Documentation and Acknowledgments
+Result:
 
-* Project folder on server:
-* Confluence link:
-* Asana board:
-* etc...
+![Result of above code](./tests/readme_doc_icon/ref/1.png)
+
+### `icon-svg`
+
+If you need more control over the SVG, you can get it directly with the `icon-svg` function, which gives you back the raw SVG string. You can then use it in an `image` block or manipulate it as you want. Note that before passing it to an image, you'll want to convert it to `bytes`, and pass the `format: "svg"` parameter to the image, otherwise it won't be rendered correctly.
+
+```typ
+#import "@preview/iconify-typst:0.1.0": icon
+
+#set page(height: auto, width: auto, margin: 1em)
+
+#image(bytes(icon-svg("mdi:home", color: blue)), format: "svg")
+```
+
+Result:
+
+![Result of above code](./tests/readme_doc_icon_svg/ref/1.png)
+
+### `block-icon`
+
+If you want the image, but do not care about it being inline, you can use the `block-icon` function, which gives you a raw image. It has an identical API to `icon`, but does not apply the vertical offset.
+
+```typ
+#import "@preview/iconify-typst:0.1.0": icon
+
+#set page(height: auto, width: auto, margin: 1em)
+
+This icon will not be inline, as it's just an image #block-icon("mdi:home", color: blue, width: 1em), and images are not inline by default.
+
+You have to put them in a box to make them inline #box(#block-icon("mdi:home", color: blue, width: 1em), inset: (y: -0.2em))
+```
+
+Result:
+
+![Result of above code](./tests/readme_doc_block_icon/ref/1.png)
+
+## Attributions
+
+All of these icons are free, but some require attribution. Please check the license of the icons you use on [icones.js.org](https://icones.js.org) and give proper attribution if required.
+
+## Thanks
+
+This project is a small wrapper on the shoulder of these giants:
+
+- [Iconify](https://iconify.design/) for the icons and the JSON format.
+- [icones.js.org](https://icones.js.org/) for the search engine.
+
+## Development
+
+You'll need the [Just](https://just.systems/) test runner. See the [Justfile](./Justfile) or run `just` without arguments for the available commands.
+
+# License
+
+MIT License. See [LICENSE.MIT](./LICENSE.MIT) for more details.

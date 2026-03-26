@@ -1,0 +1,19 @@
+{
+  "lockfileVersion": 1,
+  "configVersion": 1,
+  "workspaces": {
+    "": {
+      "name": "src",
+      "dependencies": {
+        "@iconify/json": "^2.2.454",
+      },
+    },
+  },
+  "packages": {
+    "@iconify/json": ["@iconify/json@2.2.454", "", { "dependencies": { "@iconify/types": "*", "pathe": "^2.0.3" } }, "sha512-U1c0+LBtcF4YDQGOVZpoA4w96hBcIVHFjBcg60pFdnF+CApRjnlIp27Jf1g7BaZlJ+vYcExyc/1EjUyZrY8MFQ=="],
+
+    "@iconify/types": ["@iconify/types@2.0.0", "", {}, "sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg=="],
+
+    "pathe": ["pathe@2.0.3", "", {}, "sha512-WUjGcAqP1gQacoQe+OBJsFA7Ld4DyXuUIjZ5cc75cLHvJ7dtNsTugphxIADwspS+AraAUePCKrSVtPLFj/F88w=="],
+  }
+}
