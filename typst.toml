@@ -1,7 +1,7 @@
 # for a description of available keys, see https://github.com/typst/packages/?tab=readme-ov-file#package-format
 
 [package]
-name = "iconify-typst"
+name = "iconify"
 version = "0.3.0"
 entrypoint = "src/lib.typ"
 authors = ["ecstrema"]
