@@ -1,6 +1,6 @@
 # Typst Iconify
 
-Use all of Iconify icons in your Typst documents. Browse all the icons at [icones.js.org](https://icones.js.org).
+Use all of Iconify icons in your Typst documents. Browse all the icons at [icones.js.org](https://icones.js.org). Support Typst 0.13 and above.
 
 ## Overview
 
