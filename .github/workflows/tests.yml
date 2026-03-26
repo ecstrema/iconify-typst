@@ -30,6 +30,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: stable
+
+      - name: Install dependencies
+        run: cd src && bun install
+
       - name: Install just
         uses: taiki-e/install-action@v2
         with:
