@@ -1,4 +1,4 @@
-#let icons_store = state("cache", (:))
+#let icons-store = state("iconify-icons-store", (:))
 /// Provide icons for use with the `icon` function. Download them from https:
 ///
 /// ```typ
@@ -8,7 +8,7 @@
 /// - icon_jsons (dictionary): Dictionary of icons
 /// -> none
 #let provide-icons(..icon_jsons) = {
-  icons_store.update(cache => {
+  icons-store.update(cache => {
     // If we provide a list if icon JSONs, add them all to the cache. Otherwise, add the single icon JSON to the cache.
     for icon_json in icon_jsons.pos() {
       assert(icon_json.at("prefix", default: none) != none, message: "Icon JSON missing 'prefix' field.")
@@ -31,13 +31,13 @@
 
   assert(collection != none and name != none, message: "Invalid icon name format. Expected 'collection:name'.")
 
-  let json-data = icons_store.final().at(collection, default: none)
+  let json-data = icons-store.final().at(collection, default: none)
 
   assert(
     json-data != none,
     message: "Icon collection '"
       + collection
-      + "' not found in cache. Make sure to provide the icon JSON using the 'provide-icons' function. Current collections are" + icons_store.final().keys().join(", ") + "."
+      + "' not found in cache. Make sure to provide the icon JSON using the 'provide-icons' function. Current collections are" + icons-store.final().keys().join(", ") + "."
   )
 
   let props = (
