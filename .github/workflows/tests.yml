@@ -29,7 +29,7 @@ jobs:
       - uses: oven-sh/setup-bun@v2
 
       - name: Install dependencies
-        run: cd src && bun install
+        run: cd tests && bun install
 
       - name: Install just
         uses: taiki-e/install-action@v2
