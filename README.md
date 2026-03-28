@@ -10,7 +10,7 @@ Use all of Iconify icons. Browse all the icons at [icones.js.org](https://icones
 `iconify` loads icons from Iconify JSON collections and gives you back an icon image.
 
 ```typ
-#import "@preview/iconify:0.5.2": icon, provide-icons
+#import "@preview/iconify:0.5.3": icon, provide-icons
 
 #provide-icons(json("assets/mdi.json"))
 
