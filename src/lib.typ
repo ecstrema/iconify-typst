@@ -37,7 +37,7 @@
     json-data != none,
     message: "Icon collection '"
       + collection
-      + "' not found in cache. Make sure to provide the icon JSON using the 'provide-icons' function.",
+      + "' not found in cache. Make sure to provide the icon JSON using the 'provide-icons' function. Current collections are" + icons_store.final().keys().join(", ") + "."
   )
 
   let props = (

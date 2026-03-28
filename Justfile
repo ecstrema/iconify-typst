@@ -6,10 +6,6 @@ export TYPST_ROOT := root
 default:
   @just --list --unsorted
 
-doc:
-  typst compile tests/thumbnail/test.typ thumbnail-light.svg
-  typst compile --input theme=dark tests/thumbnail/test.typ thumbnail-dark.svg
-
 # run test suite
 test *args:
   tt run --no-fail-fast {{ args }}
@@ -38,5 +34,6 @@ uninstall: (remove "@local")
 # uninstalls the library from the "@preview" prefix (for pre-release testing)
 uninstall-preview: (remove "@preview")
 
-# run ci suite
-ci: test doc
+thumbnails:
+  typst compile tests/thumbnail-light/test.typ thumbnail-light.svg
+  typst compile tests/thumbnail-dark/test.typ thumbnail-dark.svg
