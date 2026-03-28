@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Iconify JSON Downloader</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        padding: 20px;
+        line-height: 1.6;
+      }
+      .icon-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 10px;
+      }
+      .card {
+        border: 1px solid #ddd;
+        padding: 10px;
+        border-radius: 8px;
+        text-align: center;
+      }
+      .download-btn {
+        display: inline-block;
+        background: #24292e;
+        color: white;
+        padding: 5px 10px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 0.9em;
+      }
+      .download-btn:hover {
+        background: #0366d6;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Iconify Collections</h2>
+    <p>Click a collection to download the raw JSON file.</p>
+    <div id="list" class="icon-grid">Loading...</div>
+
+    <script>
+      const API_URL =
+        "https://api.github.com/repos/iconify/icon-sets/contents/json";
+      const RAW_BASE =
+        "https://raw.githubusercontent.com/iconify/icon-sets/master/json/";
+
+      async function fetchIcons() {
+        try {
+          const response = await fetch(API_URL);
+          const files = await response.json();
+
+          const listDiv = document.getElementById("list");
+          listDiv.innerHTML = ""; // Clear loading text
+
+          files.forEach((file) => {
+            if (file.name.endsWith(".json")) {
+              const card = document.createElement("div");
+              card.className = "card";
+
+              const name = file.name.replace(".json", "");
+              const downloadUrl = RAW_BASE + file.name;
+
+              // Create the button
+              const btn = document.createElement("a");
+              btn.innerText = `Download ${name}`;
+              btn.className = "download-btn";
+              btn.href = "#"; // Prevent page jump
+
+              // The Magic: Fetch and Download
+              btn.onclick = async (e) => {
+                e.preventDefault();
+                btn.innerText = "Downloading...";
+
+                try {
+                  const res = await fetch(downloadUrl);
+                  const blob = await res.blob();
+                  const url = window.URL.createObjectURL(blob);
+
+                  const a = document.createElement("a");
+                  a.href = url;
+                  a.download = file.name; // This works now because the URL is local!
+                  document.body.appendChild(a);
+                  a.click();
+
+                  window.URL.revokeObjectURL(url);
+                  a.remove();
+                  btn.innerText = `Download ${name}`;
+                } catch (err) {
+                  alert("Download failed!");
+                  console.error(err);
+                }
+              };
+
+              card.appendChild(document.createElement("strong")).innerText =
+                name;
+              card.appendChild(document.createElement("br"));
+              card.appendChild(btn);
+              listDiv.appendChild(card);
+            }
+          });
+        } catch (error) {
+          document.getElementById("list").innerText =
+            "Error loading icons.";
+          console.error(error);
+        }
+      }
+
+      fetchIcons();
+    </script>
+  </body>
+</html>

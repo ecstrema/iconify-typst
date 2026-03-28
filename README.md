@@ -10,11 +10,11 @@ Use all of Iconify icons. Browse all the icons at [icones.js.org](https://icones
 `iconify` loads icons from Iconify JSON collections and gives you back an icon image.
 
 ```typ
-#import "@preview/iconify:0.4.3": icon
+#import "@preview/iconify:0.5.0": icon, provide-icons
 
-#set page(height: auto, width: auto, margin: 1em)
+#provide-icons(json("assets/mdi.json"))
 
-text with an inline #icon("mdi:home", color: blue, width: 1em, y: -0.2em) icon
+text with an inline #icon("mdi:home", y: -0.3em) icon
 ```
 
 Result:
@@ -23,20 +23,30 @@ Result:
 
 ## Usage
 
-### `icon`
+### `provide-icons`
 
-Most of the time, you will want to use the `icon` function, which gives directly an inline image.
+Make icons available for the `icon` function. Accepts one or more Iconify JSON collections. You can download the collections you want from https://ecstrema.github.io/iconify-typst.
 
 ```typ
-#import "@preview/iconify:0.4.3": icon
+#provide-icons(
+  json("assets/streamline-ultimate.json"),
+  json("assets/carbon.json"),
+  json("assets/mdi.json"),
+  json("assets/bx.json"),
+)
+```
 
-#set page(height: auto, width: auto, margin: 1em)
+### `icon`
 
+Once you have provided the icons, you can use the `icon` function to get an icon image. The first argument is the name of the icon, in the format `collection:icon-name`. The other arguments are passed to the image, so you can adjust the size or other parameters of the image.
+
+The icon's color follows the current text color, so you can set the color of the icon with `text(fill: ...)` or with a standard `#set text(fill: ...)` rule.
+
+Note that in order to be inline, the `image` is put in a `box`.
+
+```typ
 // Basic usage
 #icon("streamline-ultimate:american-football-helmet-bold")
-
-// With color
-#icon("carbon:3d-curve-auto-colon", color: red)
 
 // you can adjust the vertical position of the icon with the `y` parameter, for example to align it better with the text baseline:
 Aligned with text #icon("mdi:home", y: -0.3em)
@@ -45,45 +55,17 @@ Not so aligned with text #icon("mdi:home")
 
 // The other parameters are passed to the image, so you can adjust the size of the icon with `width` and/or `height`:
 #icon("bx:body", width: 4em)
+
+// With color
+#text(fill: red)[#icon("carbon:3d-curve-auto-colon")]
+
+#set text(fill: blue)
+Uses current text color #icon("carbon:color-palette", y: -0.3em)
 ```
 
 Result:
 
 ![Result of above code](./tests/readme_doc_icon/ref/1.png)
-
-### `icon-svg`
-
-If you need more control over the SVG, you can get it directly with the `icon-svg` function, which gives you back the raw SVG string. You can then use it in an `image` block or manipulate it as you want. Note that before passing it to an image, you'll want to convert it to `bytes`, and pass the `format: "svg"` parameter to the image, otherwise it won't be rendered correctly.
-
-```typ
-#import "@preview/iconify:0.4.3": icon
-
-#set page(height: auto, width: auto, margin: 1em)
-
-#image(bytes(icon-svg("mdi:home", color: blue)), format: "svg")
-```
-
-Result:
-
-![Result of above code](./tests/readme_doc_icon_svg/ref/1.png)
-
-### `block-icon`
-
-If you want the image, but do not care about it being inline, you can use the `block-icon` function, which gives you a raw image. It has an identical API to `icon`, but does not apply the vertical offset.
-
-```typ
-#import "@preview/iconify:0.4.3": icon
-
-#set page(height: auto, width: auto, margin: 1em)
-
-This icon will not be inline, as it's just an image #block-icon("mdi:home", color: blue, width: 1em), and images are not inline by default.
-
-You have to put them in a box to make them inline #box(#block-icon("mdi:home", color: blue, width: 1em), inset: (y: -0.2em))
-```
-
-Result:
-
-![Result of above code](./tests/readme_doc_block_icon/ref/1.png)
 
 ## Attributions
 
